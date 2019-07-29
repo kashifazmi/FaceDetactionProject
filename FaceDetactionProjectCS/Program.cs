@@ -10,12 +10,12 @@ namespace FaceDetactionProjectCS
 {
     class Program
     {
-        // subscriptionKey = "0123456789abcdef0123456789ABCDEF"
-        private const string subscriptionKey = "9817dd19b32148f7b49f90d7fc662336";
+        // subscriptionKey = "9817dd19b32148f7b49f90d7fc662336112"
+        private const string subscriptionKey = "<your key> ";
         private const string faceEndpoint = "https://westcentralus.api.cognitive.microsoft.com";
         // localImagePath = @"C:\Documents\LocalImage.jpg"
         private const string localImagePath = @"D:\personal\PIC\surprise.jpeg";
-        private const string remoteImageUrl ="https://upload.wikimedia.org/wikipedia/commons/3/37/Dagestani_man_and_woman.jpg";
+        private const string remoteImageUrl ="path of your remote image url";
 
         private static readonly FaceAttributeType[] faceAttributes =
             { FaceAttributeType.Age, FaceAttributeType.Gender, FaceAttributeType.Emotion, FaceAttributeType.Smile };
@@ -26,10 +26,10 @@ namespace FaceDetactionProjectCS
                 new System.Net.Http.DelegatingHandler[] { });
             faceClient.Endpoint = faceEndpoint;
             Console.WriteLine("Faces being detected ...");
-            //var t1 = DetectRemoteAsync(faceClient, remoteImageUrl);
+            var t1 = DetectRemoteAsync(faceClient, remoteImageUrl);
             var t2 = DetectLocalAsync(faceClient, localImagePath);
 
-            Task.WhenAll(t2).Wait(5000);
+            Task.WhenAll(t1,t2).Wait(5000);
             Console.WriteLine("Press any key to exit");
             Console.ReadLine();
         }
